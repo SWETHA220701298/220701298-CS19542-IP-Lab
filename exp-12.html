@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Bubble Game</title>
+    
+</head>
+<body>
+    <div id="game-area">
+        <button>Start</button>
+        <div id="count"></div>
+    </div>
+
+    <script src="JQuery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#game-area').css('position','relative').css('width','100%').css('height','100vh');
+        });
+        $(document).ready(function() {
+            $('button').css('margin-left','830px').css('margin-top','370px');
+        });
+        
+      $(document).ready(function() {
+        $('button').click(function(){
+            $('button').hide();
+            var width = screen.width - 100;
+            var height = screen.height - 200;
+            var correctKeypressCount = 0;
+
+            function generateRandomAlphabet() {
+                var randomCode = Math.floor(Math.random() * (90 - 65 + 1)) + 65;
+                return String.fromCharCode(randomCode);
+            }
+
+    // Function to generate a random color
+            function generateRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+    // Function to position the bubble randomly on the screen
+    function positionBubble(bubble) {
+        var x = Math.random() * width;
+        var y = Math.random() * height;
+        bubble.css({
+            left: x + 'px',
+            top: y + 'px'
+        });
+    }
+
+    // Function to create and show a new bubble with a random alphabet and color
+    function createBubble() {
+        var alphabet = generateRandomAlphabet();
+        var color = generateRandomColor();
+        
+        var bubble = $('<div class="bubble"></div>').text(alphabet)
+                        .css('background-color', color);
+                        
+        // Append bubble to the game area
+        $('#game-area').append(bubble);
+        
+        $('.bubble').css('position','absolute').css('font-size','30px').css('border-radius','50%').css('text-align','center');
+        // Position the bubble randomly
+        positionBubble(bubble);
+    }
+
+    // Function to generate multiple bubbles at once
+    function generateMultipleBubbles(count) {
+        for (var i = 0; i < count; i++) {
+            createBubble();
+        }
+    }
+
+    // Listen for keypress events
+    $(document).keypress(function(event) {
+        var key = String.fromCharCode(event.which).toUpperCase();
+
+        
+        $('.bubble').each(function() {
+            var currentAlphabet = $(this).text();
+            
+            if (key === currentAlphabet) {
+                $(this).fadeOut(200, function() {
+                    $(this).remove(); // Remove the bubble after it fades out
+                    createBubble(); // Immediately create a new bubble after popping
+                });
+                
+                correctKeypressCount++; // Increment correct keypress count
+                $('#count').text(correctKeypressCount).css('font-size','30px'); // Update count display
+            }
+        });
+    });
+
+    // Start the game with multiple bubbles (e.g., 5)
+    generateMultipleBubbles(10);
+});
+      });
+     
+    </script>
+</body>
+</html>
