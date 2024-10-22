@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+    <HTML lang="en">
+        <HEAD>
+            <TITLE>AJAX</TITLE>
+            <SCRIPT>
+                function loadXMLDoc(){
+                    var x = new XMLHttpRequest();
+                    x.onreadystatechange=function(){
+                        if(this.readyState == 4 && this.status == 200){
+                            document.getElementById("info").textContent = this.responseText;
+                        }
+                    };
+                    x.open("GET","b.txt",true);
+                    x.send();
+                }
+            </SCRIPT>
+        </HEAD>
+        <BODY>
+            <DIV ID="info">
+                
+                    <BUTTON TYPE="submit" onclick="loadXMLDoc()">loadXMLDoc</BUTTON>
+                
+            </DIV>
+        </BODY>
+    </HTML>
+</DOCTYPE>

@@ -1,0 +1,11 @@
+                                   AJAX
+                                   
+-Asynchronous Communication: 
+     Enables web pages to be updated without reloading the entire page.
+
+-XMLHttpRequest Object: 
+     The core of AJAX, used to send requests and receive responses from the server.
+
+-Partial Page Updates: 
+     Only the necessary parts of the web page are updated, improving performance and user experience.
+
