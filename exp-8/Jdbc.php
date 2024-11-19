@@ -26,7 +26,7 @@
     }
     $con -> close();
     ?>
-    <form action="a.php" method="get">
+    <form action="select.php" method="get">
         <input type="Submit" value="View">
     </form>
 </body>
